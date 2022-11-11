@@ -1,3 +1,4 @@
+// Financial record provided
 var finances = [
 ['Jan-2010', 867884],
 ['Feb-2010', 984655],
@@ -86,3 +87,60 @@ var finances = [
 ['Jan-2017', 138230],
 ['Feb-2017', 671099]
 ];
+
+// JavaScript code that analyzes the records to calculate each of the following:
+
+//Initialize the variables
+// * The total number of months included in the dataset.
+var monthsCounter = 0;
+// * The net total amount of Profit/Losses over the entire period.
+var totalAmount = 0;
+// * The average of the **changes** in Profit/Losses over the entire period.
+//   * You will need to track what the total change in profits are from month to month and then find the average.
+//   * (`Total/Number of months`)
+var changes = 0;
+// Variables to compare past value to current value
+var pastMonth = "";
+var pastValue = 0;
+var currentMonth = "";
+var currentValue = 0;
+// * The greatest increase in profits (date and amount) over the entire period.
+var greatestIncreaseValue = 0;
+var greatestIncreasePair;
+// * The greatest decrease in losses (date and amount) over the entire period.
+var greatestDecrease = 0;
+var greatestDecreasePair;
+
+//Logic
+//for (var i = 0; i < finances.length; i++) {
+for (var i = 0; i < 3; i++){
+
+    var financesPair = finances[i];
+    console.log("financesPair:" + financesPair);
+    currentMonth = financesPair[0];
+    currentValue = financesPair[1];
+
+// If month changes, add one to its counter
+    if (currentMonth !== pastMonth) {
+        monthsCounter++;
+    }
+}
+
+console.log(
+  "Financial Analysis\n----------------------------" + 
+  "\nTotal Months: " + monthsCounter +
+  "\nTotal: " + totalAmount +
+  "\nAverage  Change: " + changes +
+  "\nGreatest Increase in Profits: " + greatestIncreasePair + 
+  "\nGreatest Decrease in Profits: " + greatestDecreasePair
+);
+
+// When you open your code in the browser your resulting analysis should look similar to the following:
+//   Financial Analysis
+//   ----------------------------
+//   Total Months: 25
+//   Total: $2561231
+//   Average  Change: $-2315.12
+//   Greatest Increase in Profits: Feb-2012 ($1926159)
+//   Greatest Decrease in Profits: Sep-2013 ($-2196167)
+// Your final code should print the analysis to the console.
