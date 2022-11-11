@@ -91,25 +91,28 @@ var finances = [
 // JavaScript code that analyzes the records to calculate each of the following:
 
 //Initialize the variables
-// * The total number of months included in the dataset.
-var monthsCounter = 0;
+// * The total number of months included in the dataset. --> see final console.log
 // * The net total amount of Profit/Losses over the entire period.
 var totalAmount = 0;
+
 // * The average of the **changes** in Profit/Losses over the entire period.
 //   * You will need to track what the total change in profits are from month to month and then find the average.
-//   * (`Total/Number of months`)
-var changes = 0;
+//   * (`Total/Number of months`) --> see final console.log
+
 // Variables to compare past value to current value
 var pastMonth = "";
 var pastValue = 0;
 var currentMonth = "";
 var currentValue = 0;
+
 // * The greatest increase in profits (date and amount) over the entire period.
+var greatestIncreaseMonth = "";
 var greatestIncreaseValue = 0;
-var greatestIncreasePair;
+
 // * The greatest decrease in losses (date and amount) over the entire period.
-var greatestDecrease = 0;
-var greatestDecreasePair;
+var greatestDecreaseMonth = "";
+var greatestDecreaseValue = 0;
+
 
 //Logic
 //for (var i = 0; i < finances.length; i++) {
@@ -120,19 +123,36 @@ for (var i = 0; i < 3; i++){
     currentMonth = financesPair[0];
     currentValue = financesPair[1];
 
-// If month changes, add one to its counter
-    if (currentMonth !== pastMonth) {
-        monthsCounter++;
+    // Increment total amount with new value
+    totalAmount = totalAmount + currentValue;
+
+    //Check if the difference between the current and the past value is greater than the greatest increase
+    if (currentValue - pastValue > 0 && // means it is an increase
+        currentValue - pastValue > greatestIncreaseValue){ // compare with greatest increase
+        greatestIncreaseMonth = currentMonth;
+        greatestIncreaseValue = currentValue - pastValue ;
     }
+
+    //Check if the difference between the current and the past value is greater than the greatest decrease
+        if (currentValue - pastValue < 0 && // means it is a decrease
+        currentValue - pastValue < greatestDecreaseValue){ // compare with greatest decrease
+        greatestDecreaseMonth = currentMonth;
+        greatestDecreaseValue = currentValue - pastValue ;
+    }
+
+    // Update the comparison variables
+    pastMonth = currentMonth;
+    pastValue = currentValue;
+
 }
 
 console.log(
   "Financial Analysis\n----------------------------" + 
-  "\nTotal Months: " + monthsCounter +
+  "\nTotal Months: " + finances.length +
   "\nTotal: " + totalAmount +
-  "\nAverage  Change: " + changes +
-  "\nGreatest Increase in Profits: " + greatestIncreasePair + 
-  "\nGreatest Decrease in Profits: " + greatestDecreasePair
+  "\nAverage  Change: " + totalAmount/ finances.length + //('Total/Number of months')
+  "\nGreatest Increase in Profits: " + greatestIncreaseMonth + "|" + greatestIncreaseValue +
+  "\nGreatest Decrease in Profits: " + greatestDecreaseMonth + "|" + greatestDecreaseValue
 );
 
 // When you open your code in the browser your resulting analysis should look similar to the following:
