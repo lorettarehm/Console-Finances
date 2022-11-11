@@ -16,12 +16,13 @@ It should look like:
     Financial Analysis
     ----------------------------
     Total Months: 86
-    Total: 38382578
-    Average Change: 446309.0465116279
-    Greatest Increase in Profits: Feb-2012|1926159
-    Greatest Decrease in Profits: Sep-2013|-2196167
+    Total: $38382578
+    Average Change: $-2288.20
+    Greatest Increase in Profits: Feb-2012 ($1926159)
+    Greatest Decrease in Profits: Sep-2013 ($-2196167)
 
 ## Credits
 * Trilogy Education Services
+* [JavaScript Number toFixed()](https://www.w3schools.com/jsref/jsref_tofixed.asp)
 
 ## [License](./LICENSE)

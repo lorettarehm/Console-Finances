@@ -97,7 +97,8 @@ var totalAmount = 0;
 
 // * The average of the **changes** in Profit/Losses over the entire period.
 //   * You will need to track what the total change in profits are from month to month and then find the average.
-//   * (`Total/Number of months`) --> see final console.log
+//   * (`Total/Number of months`)
+var changeSum = 0;
 
 // Variables to compare past value to current value
 var pastMonth = "";
@@ -114,7 +115,7 @@ var greatestDecreaseMonth = "";
 var greatestDecreaseValue = 0;
 
 
-//Logic
+//Read through the records in the array
 for (var i = 0; i < finances.length; i++) {
 
     var financesPair = finances[i];
@@ -129,15 +130,18 @@ for (var i = 0; i < finances.length; i++) {
           pastValue = currentValue;
     }
 
+    // Increment changeSum with the difference between the values
+    changeSum = changeSum + (currentValue - pastValue);
+
     //Check if the difference between the current and the past value is greater than the greatest increase
-    if (currentValue - pastValue > 0 && // means it is an increase
+    if (currentValue > pastValue && // means it is an increase
         currentValue - pastValue > greatestIncreaseValue){ // compare with greatest increase
         greatestIncreaseMonth = currentMonth;
         greatestIncreaseValue = currentValue - pastValue ;
     }
 
     //Check if the difference between the current and the past value is greater than the greatest decrease
-        if (currentValue - pastValue < 0 && // means it is a decrease
+        if (currentValue < pastValue && // means it is a decrease
         currentValue - pastValue < greatestDecreaseValue){ // compare with greatest decrease
         greatestDecreaseMonth = currentMonth;
         greatestDecreaseValue = currentValue - pastValue ;
@@ -152,10 +156,10 @@ for (var i = 0; i < finances.length; i++) {
 console.log(
   "Financial Analysis\n----------------------------" + 
   "\nTotal Months: " + finances.length +
-  "\nTotal: " + totalAmount +
-  "\nAverage  Change: " + totalAmount/ finances.length + //('Total/Number of months')
-  "\nGreatest Increase in Profits: " + greatestIncreaseMonth + "|" + greatestIncreaseValue +
-  "\nGreatest Decrease in Profits: " + greatestDecreaseMonth + "|" + greatestDecreaseValue
+  "\nTotal: $" + totalAmount +
+  "\nAverage Change: $" + (changeSum/finances.length).toFixed(2) + //('Total/Number of months')
+  "\nGreatest Increase in Profits: " + greatestIncreaseMonth + " ($" + greatestIncreaseValue + ")" +
+  "\nGreatest Decrease in Profits: " + greatestDecreaseMonth + " ($" + greatestDecreaseValue + ")"
 );
 
 // When you open your code in the browser your resulting analysis should look similar to the following:
