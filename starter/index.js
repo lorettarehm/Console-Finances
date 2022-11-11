@@ -115,16 +115,19 @@ var greatestDecreaseValue = 0;
 
 
 //Logic
-//for (var i = 0; i < finances.length; i++) {
-for (var i = 0; i < 3; i++){
+for (var i = 0; i < finances.length; i++) {
 
     var financesPair = finances[i];
-    console.log("financesPair:" + financesPair);
     currentMonth = financesPair[0];
     currentValue = financesPair[1];
 
     // Increment total amount with new value
     totalAmount = totalAmount + currentValue;
+
+    //Fix the first reading of the loop so that it doesn't compare first value against 0
+    if (i === 0) {
+          pastValue = currentValue;
+    }
 
     //Check if the difference between the current and the past value is greater than the greatest increase
     if (currentValue - pastValue > 0 && // means it is an increase
